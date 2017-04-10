@@ -5,7 +5,7 @@
 所以自己模仿了一个SDCycleScrollView的swift版, 最基础的功能应该有了, 后续在慢慢追加
 
 
-####使用方法
+#### 使用方法
 
 ```
 init(scrollViewFrame frame: CGRect)
@@ -20,7 +20,7 @@ init(scrollViewFrame frame: CGRect, delegate: INOScrollViewDelegate, imageArray:
 init(scrollViewFrame frame: CGRect, delegate: INOScrollViewDelegate, placeholderImage: UIImage, imageArray: [Any]) 
 ```
 
-可定制属性
+##### 可定制属性
 
 ```
 //滚动方向
@@ -82,6 +82,5 @@ var titleLabelTextColor: UIColor = UIColor.white
 var INOScrollViewContentMode: UIViewContentMode = .scaleAspectFill
 ```
 
-
-![]([http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif])
+![](http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif)
 
