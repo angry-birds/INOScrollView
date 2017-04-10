@@ -5,6 +5,8 @@
 所以自己模仿了一个SDCycleScrollView的swift版, 最基础的功能应该有了, 后续在慢慢追加
 
 
+![](http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif)
+
 #### 使用方法
 
 ```
@@ -82,5 +84,4 @@ var titleLabelTextColor: UIColor = UIColor.white
 var INOScrollViewContentMode: UIViewContentMode = .scaleAspectFill
 ```
 
-![](http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif)
 
