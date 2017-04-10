@@ -6,6 +6,7 @@
 
 
 ####使用方法
+
 ```
 init(scrollViewFrame frame: CGRect)
 ```
@@ -20,6 +21,7 @@ init(scrollViewFrame frame: CGRect, delegate: INOScrollViewDelegate, placeholder
 ```
 
 可定制属性
+
 ```
 //滚动方向
 var scrollDirection: UICollectionViewScrollDirection = .horizontal
@@ -81,4 +83,5 @@ var INOScrollViewContentMode: UIViewContentMode = .scaleAspectFill
 ```
 
 
+![]([http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif])
 
