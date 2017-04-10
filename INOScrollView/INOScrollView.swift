@@ -58,7 +58,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     //滚动方向
     var scrollDirection: UICollectionViewScrollDirection = .horizontal {
         didSet{
-            self.flowLayout.scrollDirection = scrollDirection
+            flowLayout.scrollDirection = scrollDirection
         }
     }
     
@@ -68,11 +68,11 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     /// 是否自动滚动 默认true
     var autoScroll = true {
         didSet{
-            if self.autoScroll == true {
+            if autoScroll == true {
                 
                 if imageArray != nil {
                     resetTimer()
-                    mainView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: UICollectionViewScrollPosition.init(rawValue: 0), animated: false)
+                    mainView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
                 }
                 
             }else{
@@ -100,13 +100,17 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     var infiniteCycle: Bool = true
     
     /// 底部文字数组
-    var titleArray: [String]?
+    var titleArray: [String]? {
+        didSet{
+            mainView.reloadData()
+        }
+    }
     
     /// 图片数组 内存URL String 图片
     var imageArray: [Any]? {
         didSet{
             
-            guard let tempArray = self.imageArray else {
+            guard let tempArray = imageArray else {
                 return
             }
             
@@ -115,18 +119,18 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
                 return
             }
             
-            pageControl.numberOfPages = self.imageArray!.count
+            pageControl.numberOfPages = imageArray!.count
             pageControl.currentPage = 0
             
             setPageDotAliment()
             
-            self.imageArray!.insert(tempArray.last as Any, at: 0)
-            self.imageArray!.append(tempArray.first!)
+            imageArray!.insert(tempArray.last as Any, at: 0)
+            imageArray!.append(tempArray.first!)
             
             resetTimer()
             mainView.reloadData()
             
-            mainView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: UICollectionViewScrollPosition.init(rawValue: 0), animated: false)
+            mainView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
             
         }
         
@@ -139,9 +143,9 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         didSet{
             
             if showPageDot {
-                self.pageControl.isHidden = false
+                pageControl.isHidden = false
             } else {
-                self.pageControl.isHidden = true
+                pageControl.isHidden = true
             }
         }
 
@@ -262,7 +266,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         flowLayout.scrollDirection = .horizontal
         flowLayout.itemSize = size
         
-        mainView = UICollectionView.init(frame: CGRect.init(x: 0, y: 0, width: width, height: height), collectionViewLayout: flowLayout)
+        mainView = UICollectionView(frame: CGRect(x: 0, y: 0, width: width, height: height), collectionViewLayout: flowLayout)
         mainView.backgroundColor = UIColor.clear
         mainView.isPagingEnabled = true
         mainView.showsVerticalScrollIndicator = false
@@ -273,7 +277,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         addSubview(mainView!)
         
         
-        pageControl = UIPageControl(frame: CGRect.init(x: 0.0, y: height - 30.0, width: width, height: 30.0))
+        pageControl = UIPageControl(frame: CGRect(x: 0.0, y: height - 30.0, width: width, height: 30.0))
         pageControl.isUserInteractionEnabled = false
         pageControl.pageIndicatorTintColor = pageDotColor
         pageControl.currentPageIndicatorTintColor = currentDotColor
@@ -338,7 +342,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             if item is URL {
                 url = (item as! URL)
             }else if item is String{
-                url = URL.init(string: item as! String)
+                url = URL(string: item as! String)
             }
             
             cell.imageView.kf.setImage(with: url, placeholder: placeholder, options: [.cacheMemoryOnly], progressBlock: { (receive, total) in
@@ -402,7 +406,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             let delay = DispatchTime.now()
             
             DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
             })
         }
         
@@ -413,7 +417,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             let delay = DispatchTime.now()
             
             DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
             })
         }
         
@@ -437,7 +441,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
 //            
 //            let delay = DispatchTime.now()
 //            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-//                self.mainView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
 //            })
 //        }
 
@@ -478,7 +482,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     
         var index = getCurrentPage()
        
-        mainView.scrollToItem(at: IndexPath.init(row: index+1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: true)
+        mainView.scrollToItem(at: IndexPath(row: index+1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: true)
         
         if index + 1 == imageArray!.count - 1 {
             index = 1
@@ -486,7 +490,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             let delay = DispatchTime.now() + .milliseconds(500)
             
             DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath.init(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
             })
         
             
@@ -517,12 +521,12 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             let size = pageControl.size(forNumberOfPages: pageControl.numberOfPages)
             
             let center = pageControl.center
-            pageControl.frame = CGRect.init(x: 0, y: 0, width: size.width, height: size.height)
+            pageControl.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
             
             if pageControlAliment == .center {
                 pageControl.center = center
             } else if pageControlAliment == .right {
-                pageControl.center = CGPoint.init(x: width - size.width/2 - 16 , y: center.y)
+                pageControl.center = CGPoint(x: width - size.width/2 - 16 , y: center.y)
             }else{
                 pageControl.center = center
             }

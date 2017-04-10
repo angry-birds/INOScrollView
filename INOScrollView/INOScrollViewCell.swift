@@ -20,9 +20,9 @@ class INOScrollViewCell: UICollectionViewCell {
         
         didSet{
             if !showTextLabel {
-                self.titleLabel.isHidden = true
+                titleLabel.isHidden = true
             }else{
-                self.titleLabel.isHidden = false
+                titleLabel.isHidden = false
             }
         }
         
@@ -31,35 +31,35 @@ class INOScrollViewCell: UICollectionViewCell {
     /// 文本框的高度
     var titleLabelHeight: CGFloat = 30.0 {
         didSet{
-            titleLabel.frame = CGRect.init(x: 0, y: frame.size.height - self.titleLabelHeight, width: frame.size.width, height: self.titleLabelHeight)
+            titleLabel.frame = CGRect(x: 0, y: frame.size.height - titleLabelHeight, width: frame.size.width, height: titleLabelHeight)
         }
     }
     
     /// 文字的大小
     var titleLabelFont: UIFont = UIFont.systemFont(ofSize: 14) {
         didSet{
-            titleLabel.font = self.titleLabelFont
+            titleLabel.font = titleLabelFont
         }
     }
     
     /// Label的颜色
     var titleLabelColor: UIColor = UIColor(red: 200/255.0, green: 200/255.0, blue: 200/255.0, alpha: 0.5) {
         didSet{
-            titleLabel.backgroundColor = self.titleLabelColor
+            titleLabel.backgroundColor = titleLabelColor
         }
     }
     
     /// 文字的颜色
     var titleLabelTextColor: UIColor = UIColor.white {
         didSet{
-            titleLabel.textColor = self.titleLabelTextColor
+            titleLabel.textColor = titleLabelTextColor
         }
     }
     
     /// 图片的ContentModel
     var INOScrollViewContentMode: UIViewContentMode = .scaleAspectFill {
         didSet{
-            imageView.contentMode = self.INOScrollViewContentMode
+            imageView.contentMode = INOScrollViewContentMode
         }
     }
     
@@ -73,7 +73,6 @@ class INOScrollViewCell: UICollectionViewCell {
         addSubview(imageView)
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: imageView.frame.height - 40, width: frame.size.width, height: 40))
-        titleLabel.text = ""
         addSubview(titleLabel)
         
         print(titleLabel.frame)
