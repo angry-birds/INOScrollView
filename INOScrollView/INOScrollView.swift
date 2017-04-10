@@ -15,6 +15,7 @@ enum INOScrollViewPageAliment {
     case right
 }
 
+
 protocol INOScrollViewDelegate {
     
     ///点击图片回调
@@ -53,6 +54,13 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     /*************** 可定制借口 ***********************/
     
     ///
+    
+    //滚动方向
+    var scrollDirection: UICollectionViewScrollDirection = .horizontal {
+        didSet{
+            self.flowLayout.scrollDirection = scrollDirection
+        }
+    }
     
     /// 默认图片
     var placeholder: UIImage?

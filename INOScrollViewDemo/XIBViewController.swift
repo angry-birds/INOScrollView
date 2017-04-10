@@ -20,8 +20,6 @@ class XIBViewController: UIViewController {
         edgesForExtendedLayout = UIRectEdge(rawValue: 0)
         navigationController?.navigationBar.isTranslucent = false
         
-        scrollView.autoScrollTimerInterval = 2.0
-        view.layoutIfNeeded()
         scrollView.imageArray = [
             "http://wx3.sinaimg.cn/mw690/62eeaba5ly1fee5yt59wrj20fa08lafr.jpg",
             "http://wx4.sinaimg.cn/mw690/6a624f11ly1fed4bwlbb0j20go0h6q5h.jpg",
@@ -35,6 +33,11 @@ class XIBViewController: UIViewController {
             "333333",
             "444444",
         ]
+        
+        
+        scrollView.scrollDirection = .vertical
+        scrollView.autoScrollTimerInterval = 2.0
+        scrollView.showTextLabel = true
         
     }
 

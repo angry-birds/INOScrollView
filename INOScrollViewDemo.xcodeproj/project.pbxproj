@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0AAA50BCC87C9E4AB7740F6F /* Pods_INOScrollViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D07A1C1F7614753F0E89D1D /* Pods_INOScrollViewDemo.framework */; };
+		7977F8951E9B8776003202B6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7977F8941E9B8776003202B6 /* README.md */; };
 		79CB00621E9B6C4E003C653D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB00611E9B6C4E003C653D /* AppDelegate.swift */; };
 		79CB00641E9B6C4E003C653D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CB00631E9B6C4E003C653D /* ViewController.swift */; };
 		79CB00671E9B6C4E003C653D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79CB00651E9B6C4E003C653D /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7977F8941E9B8776003202B6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		79CB005E1E9B6C4E003C653D /* INOScrollViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = INOScrollViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79CB00611E9B6C4E003C653D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		79CB00631E9B6C4E003C653D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				79CB005F1E9B6C4E003C653D /* Products */,
 				4D97C57FFE169602CBB6D9E7 /* Pods */,
 				9D6A63E9E9A1082627723EBE /* Frameworks */,
+				7977F8941E9B8776003202B6 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -360,6 +363,7 @@
 				79CB00951E9B6DCF003C653D /* XIBViewController.swift in Sources */,
 				79CB00641E9B6C4E003C653D /* ViewController.swift in Sources */,
 				79CB00921E9B6C71003C653D /* INOScrollView.swift in Sources */,
+				7977F8951E9B8776003202B6 /* README.md in Sources */,
 				79CB00971E9B6DD9003C653D /* CodeViewController.swift in Sources */,
 				79CB00931E9B6C71003C653D /* INOScrollViewCell.swift in Sources */,
 				79CB00621E9B6C4E003C653D /* AppDelegate.swift in Sources */,
