@@ -74,8 +74,7 @@ class INOScrollViewCell: UICollectionViewCell {
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: imageView.frame.height - 40, width: frame.size.width, height: 40))
         addSubview(titleLabel)
-        
-        print(titleLabel.frame)
+    
         
     }
     

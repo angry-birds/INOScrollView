@@ -271,6 +271,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         mainView.isPagingEnabled = true
         mainView.showsVerticalScrollIndicator = false
         mainView.showsHorizontalScrollIndicator = false
+        mainView.bounces = false
         mainView.register(INOScrollViewCell.self, forCellWithReuseIdentifier: kIdentifier)
         mainView.delegate = self
         mainView.dataSource = self
@@ -329,7 +330,6 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         cell.titleLabelTextColor = titleLabelTextColor
         cell.INOScrollViewContentMode = INOScrollViewContentMode
         
-        print(cell.titleLabel.frame)
         
         let item = imageArray![indexPath.row] as Any
 
