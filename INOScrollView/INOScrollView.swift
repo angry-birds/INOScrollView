@@ -393,33 +393,64 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         }
     }
     
+    
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        
+        var index = getCurrentPage()
+        
+        let delay = DispatchTime.now() + .milliseconds(200)
+        
+        if index == imageArray!.count - 2 && velocity.x > 0.0 {
+            index = 1
+            
+            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+            })
+        }
+        
+        if index == 0 && velocity.x < 0.0 {
+            
+            index = imageArray!.count - 2
+            
+            
+            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+            })
+        }
+
+        
+    }
+    
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if autoScroll {
             setupTimer()
         }
         
-        var index = getCurrentPage()
-        
-        if index == imageArray!.count - 1 {
-            index = 1
-            
-            let delay = DispatchTime.now()
-            
-            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-            })
-        }
-        
-        if index == 0 {
-            
-            index = imageArray!.count - 2
-            
-            let delay = DispatchTime.now()
-            
-            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-            })
-        }
+//        var index = getCurrentPage()
+//        
+//        if index == imageArray!.count - 1 {
+//            index = 1
+//            
+//            let delay = DispatchTime.now()
+//            
+//            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+//            })
+//        }
+//        
+//        if index == 0 {
+//            
+//            index = imageArray!.count - 2
+//            
+//            let delay = DispatchTime.now()
+//            
+//            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
+//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+//            })
+//        }
         
         
     }
