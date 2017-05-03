@@ -124,15 +124,23 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             
             setPageDotAliment()
             
-            imageArray!.insert(tempArray.last as Any, at: 0)
-            imageArray!.append(tempArray.first!)
+//            imageArray!.insert(tempArray.last as Any, at: 0)
+//            imageArray!.append(tempArray.first!)
             
             resetTimer()
             mainView.reloadData()
             
-            mainView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+//            mainView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+            
+            self.scrollToCenter()
             
         }
+        
+    }
+    
+    func scrollToCenter(){
+        
+        mainView.scrollToItem(at: IndexPath(row: imageArray!.count * 49, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
         
     }
     
@@ -310,7 +318,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if let array = imageArray {
-            return array.count
+            return infiniteCycle ? array.count * 100 : array.count
         }
         
         return 0
@@ -331,7 +339,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         cell.INOScrollViewContentMode = INOScrollViewContentMode
         
         
-        let item = imageArray![indexPath.row] as Any
+        let item = imageArray![indexPath.row % imageArray!.count] as Any
 
         if item is UIImage {
             cell.imageView.image = (item as! UIImage)
@@ -363,15 +371,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             return cell
         }
         
-        var index = 0
-        
-        if indexPath.row == 0 {
-            index = imageArray!.count - 2
-        } else if indexPath.row == imageArray!.count - 1 {
-           index = 1
-        }else{
-            index = indexPath.row - 1
-        }
+        let index = indexPath.row % imageArray!.count
         
         if titleArray!.count > index {
             cell.titleLabel.text = titleArray![index]
@@ -398,26 +398,12 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         
-        var index = getCurrentPage()
+        let index = getCurrentPage()
+
         
-        let delay = DispatchTime.now() + .milliseconds(200)
         
-        if index == imageArray!.count - 2 && velocity.x > 0.0 {
-            index = 1
-            
-            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-            })
-        }
-        
-        if index == 0 && velocity.x < 0.0 {
-            
-            index = imageArray!.count - 2
-            
-            
-            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-            })
+        if index == imageArray!.count * 90 || index == imageArray!.count * 9 {
+            self.scrollToCenter()
         }
 
         
@@ -429,53 +415,17 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             setupTimer()
         }
         
-//        var index = getCurrentPage()
-//        
-//        if index == imageArray!.count - 1 {
-//            index = 1
-//            
-//            let delay = DispatchTime.now()
-//            
-//            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-//            })
-//        }
-//        
-//        if index == 0 {
-//            
-//            index = imageArray!.count - 2
-//            
-//            let delay = DispatchTime.now()
-//            
-//            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-//            })
-//        }
-        
         
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let index = getCurrentPage()
         
-        if index == 0 {
-            pageControl.currentPage = imageArray!.count - 2
-        } else if index == imageArray!.count {
-            pageControl.currentPage = 1
-        } else {
-            pageControl.currentPage = index - 1
+        pageControl.currentPage = index % imageArray!.count
+        
+        if index == imageArray!.count * 90 || index == imageArray!.count * 9 {
+            self.scrollToCenter()
         }
-        
-        
-//        if index == imageArray!.count - 1 {
-//            index = 1
-//            
-//            let delay = DispatchTime.now()
-//            DispatchQueue.main.asyncAfter(deadline: delay, execute: {
-//                self.mainView.scrollToItem(at: IndexPath(row: index, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
-//            })
-//        }
-
         
     }
     
