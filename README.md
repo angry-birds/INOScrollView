@@ -1,8 +1,8 @@
 # INOScrollView
-学习swift, 模仿SDCycleScrollView写了一个swift
+学习swift, 模仿SDCycleScrollView写了一个swift版
 
 换了公司, 启动新项目, 刚好用一下swift, 
-所以自己模仿了一个SDCycleScrollView的swift版, 最基础的功能应该有了, 后续在慢慢追加
+所以自己模仿了一个SDCycleScrollView的swift版, 最基础的功能应该有了, 后续有需求在慢慢追加
 
 
 ![](http://oo6ubxy3u.bkt.clouddn.com/INOScrollView.gif)
