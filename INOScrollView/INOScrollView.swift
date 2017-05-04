@@ -132,7 +132,7 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
             
 //            mainView.scrollToItem(at: IndexPath(row: 1, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
             
-            self.scrollToCenter()
+            scrollToCenter()
             
         }
         
@@ -140,8 +140,16 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     
     func scrollToCenter(){
         
-        mainView.scrollToItem(at: IndexPath(row: imageArray!.count * 49, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+        let index = getCurrentPage()
         
+        if index == imageArray!.count * 90 || index == imageArray!.count * 9 {
+            mainView.scrollToItem(at: IndexPath(row: imageArray!.count * 49, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+        } else if index > imageArray!.count * 90 || index < imageArray!.count * 9{
+            
+            // 获取超出的index
+            let overstepIndex = index % imageArray!.count;
+            mainView.scrollToItem(at: IndexPath(row: imageArray!.count * 49 + overstepIndex, section: 0), at: UICollectionViewScrollPosition(rawValue: 0), animated: false)
+        }
     }
     
     
@@ -397,25 +405,15 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        
-        let index = getCurrentPage()
-
-        
-        
-        if index == imageArray!.count * 90 || index == imageArray!.count * 9 {
-            self.scrollToCenter()
-        }
-
-        
     }
     
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if autoScroll {
+        if autoScroll && !(timer != nil){
+            resetTimer()
+        }else{
             setupTimer()
         }
-        
-        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -423,14 +421,9 @@ class INOScrollView: UIView, UICollectionViewDelegate, UICollectionViewDataSourc
         
         pageControl.currentPage = index % imageArray!.count
         
-        if index == imageArray!.count * 90 || index == imageArray!.count * 9 {
-            self.scrollToCenter()
-        }
+        scrollToCenter()
         
     }
-    
-    
-    
     
     
     // MARK: - PrivateMethod
